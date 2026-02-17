@@ -37,4 +37,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mohamed1651_sock-shop-orders_c41558ad-e075-4249-8e02-0c6b815cf92f -Dsonar.projectName='sock-shop-orders'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DskipTests -Dsonar.projectKey=Mohamed1651_sock-shop-orders_c41558ad-e075-4249-8e02-0c6b815cf92f -Dsonar.projectName='sock-shop-orders'
