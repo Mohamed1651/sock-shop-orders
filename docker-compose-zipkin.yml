@@ -18,9 +18,11 @@ services:
     ports:
       - "8082:80"
   orders-db:
-    image: mongo
+    image: mongo:4.2
     hostname: orders-db
     restart: always
+    ports:
+      - "27017:27017"
     cap_drop:
       - all
     cap_add:
