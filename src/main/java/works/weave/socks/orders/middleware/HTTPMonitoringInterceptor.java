@@ -24,18 +24,22 @@ public class HTTPMonitoringInterceptor implements HandlerInterceptor {
             .help("Request duration in seconds.")
             .labelNames("service", "method", "path", "status_code")
             .register();
-
     private static final String startTimeKey = "startTime";
+
+    private final ResourceMappings mappings;
+    private final JpaHelper jpaHelper;
+    private final RepositoryRestConfiguration repositoryConfiguration;
+    private final ApplicationContext applicationContext;
+    private final RequestMappingHandlerMapping requestMappingHandlerMapping;
+
     @Autowired
-    ResourceMappings mappings;
-    @Autowired
-    JpaHelper jpaHelper;
-    @Autowired
-    RepositoryRestConfiguration repositoryConfiguration;
-    @Autowired
-    ApplicationContext applicationContext;
-    @Autowired
-    RequestMappingHandlerMapping requestMappingHandlerMapping;
+    public HTTPMonitoringInterceptor(ResourceMappings mappings, JpaHelper jpaHelper, RepositoryRestConfiguration repositoryConfiguration, ApplicationContext applicationContext, RequestMappingHandlerMapping requestMappingHandlerMapping){
+        this.mappings = mappings;
+        this.jpaHelper = jpaHelper;
+        this.repositoryConfiguration = repositoryConfiguration;
+        this.applicationContext = applicationContext;
+        this.requestMappingHandlerMapping = requestMappingHandlerMapping;
+    }
     private Set<PatternsRequestCondition> urlPatterns;
     @Value("${spring.application.name:orders}")
     private String serviceName;
@@ -66,7 +70,7 @@ public class HTTPMonitoringInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse
-            httpServletResponse, Object o, Exception e) throws Exception {
+            httpServletResponse, Object o, Exception e) throws Exception { // not needed
     }
 
     private String getMatchingURLPattern(HttpServletRequest httpServletRequest) {

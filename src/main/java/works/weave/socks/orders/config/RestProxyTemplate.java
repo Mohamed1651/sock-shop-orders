@@ -16,8 +16,12 @@ import java.net.Proxy;
 @Component
 public final class RestProxyTemplate {
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final RestTemplate restTemplate;
 
-    @Autowired RestTemplate restTemplate;
+    @Autowired
+    public RestProxyTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @Bean
     public RestTemplate restTemplate() {
