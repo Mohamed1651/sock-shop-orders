@@ -33,15 +33,16 @@ import java.util.regex.Pattern;
 @RepositoryRestController
 public class OrdersController {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
+    private final OrdersConfigurationProperties config;
+    private final AsyncGetService asyncGetService;
+    private final CustomerOrderRepository customerOrderRepository;
 
     @Autowired
-    private OrdersConfigurationProperties config;
-
-    @Autowired
-    private AsyncGetService asyncGetService;
-
-    @Autowired
-    private CustomerOrderRepository customerOrderRepository;
+    public OrdersController(OrdersConfigurationProperties config, AsyncGetService asyncGetService, CustomerOrderRepository customerOrderRepository){
+        this.config = config;
+        this.asyncGetService = asyncGetService;
+        this.customerOrderRepository = customerOrderRepository;
+    }
 
     @Value(value = "${http.timeout:5}")
     private long timeout;
