@@ -125,9 +125,10 @@ public class OrdersController {
         } catch (TimeoutException e) {
             e.printStackTrace();
             throw new IllegalStateException("Unable to create order due to timeout from one of the services.", e);
-        } catch (InterruptedException | IOException | ExecutionException e) {
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            e.printStackTrace();
+            throw new IllegalStateException("Unable to create order due to interruption.", e);
+        } catch (IOException | ExecutionException e) {
             throw new IllegalStateException("Unable to create order due to unspecified IO error.", e);
         }
     }

@@ -73,7 +73,7 @@ public class Item {
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemId);
+        return itemId != null ? itemId.hashCode() : 0;
     }
 
     // ****** Crappy getter/setters for Jackson JSON invoking ********
