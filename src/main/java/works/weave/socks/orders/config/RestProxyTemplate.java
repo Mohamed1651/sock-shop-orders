@@ -3,6 +3,7 @@ package works.weave.socks.orders.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +20,7 @@ public final class RestProxyTemplate {
     private final RestTemplate restTemplate;
 
     @Autowired
-    public RestProxyTemplate(RestTemplate restTemplate) {
+    public RestProxyTemplate(@Lazy RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
